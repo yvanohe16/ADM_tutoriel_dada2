@@ -3,9 +3,10 @@ title: "R Notebook"
 output: github_document 
 ---
 
-```{r}
+```{r, echo=FALSE}
 download.file("https://github.com/ANF-MetaBioDiv/course-material/archive/refs/heads/main.zip", destfile = "main.zip")
 ```
+
 ```{r}
 refdb_folder <- here::here("data", "refdb")
 refdb_folder
@@ -13,6 +14,10 @@ refdb_folder
 
 ```{r}
 if (!dir.exists(refdb_folder)) dir.create(refdb_folder, recursive = TRUE)
+```
+
+```{r}
+file.copy(from = "course-material-main/data/raw", to = "data", recursive = TRUE)
 ```
 
 ```{r}
@@ -64,12 +69,14 @@ path_to_fastqs <- here::here("data", "raw")
 fnFs <- sort(list.files(path_to_fastqs,
                         pattern = "_R1.fastq.gz",
                         full.names = TRUE))
+print(fnFs)
 ```
 
 ```{r}
 fnRs <- sort(list.files(path_to_fastqs,
                         pattern = "_R2.fastq.gz",
                         full.names = TRUE))
+print(fnRs)
 ```
 
 ```{r}
@@ -81,5 +88,15 @@ sample_names <- basename(fnFs) |>
 ```{r}
 basename(fnFs) |>
   head()
+```
+
+```{r}
+basename(fnFs) |>
+  strsplit(split = "_") |>
+  head()
+```
+
+```{r}
+
 ```
 
